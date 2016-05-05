@@ -1,0 +1,34 @@
+<header>
+
+    <h1>Medicine</h1><br>
+
+    <h1>Devices registered ( {{$ctrl.devicesCount}} )</h1>
+
+    <login-buttons></login-buttons>
+
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-click="$ctrl.setDevice('nic')" >All</label>
+        <label ng-repeat="pulse in $ctrl.devices" class="btn btn-primary" ng-click="$ctrl.setDevice(pulse)" >{{pulse}}</label>
+    </div>
+
+</header>
+
+<ul>
+    <span class="measure">
+        <h1>Measurements:</h1><br>
+    </span>
+
+    <li ng-repeat="pulse in $ctrl.pulse" ng-if="pulse.device === $ctrl.deviceId ||  $ctrl.deviceId === 'nic'" >
+
+
+    <span class="text">
+        <strong>{{pulse.device}}</strong> - Pulse: {{pulse.pulse}}   MeasurementDate:{{pulse.createdAt}}
+    </span>
+
+    </li>
+    <label  ng-if="$ctrl.deviceId != 'nic'" class="avgLabel" >Average bpm: <strong>{{$ctrl.calcAvg()}} </strong></label>
+    <label class="btn btn-primary btnBuzz" ng-click="$ctrl.setBuzzer()" ng-if="$ctrl.deviceId != 'nic'">Set Buzzer ON/OFF
+        </label>
+    <div id="chart">{{createChart}}</div>
+
+</ul>
